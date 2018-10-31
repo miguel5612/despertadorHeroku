@@ -39,7 +39,7 @@ var despertar = function(){
     console.log("tiempo en minutos: ",tiempoMinutos);
     console.log("tiempo en MS:", tiempoMilisegundos);
 
-    if(isTime){
+    if(isTime()){
         http.get("http://on3dmonitor.herokuapp.com");
         console.log("despertando a heroku");
     }
