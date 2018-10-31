@@ -1,5 +1,6 @@
 var http = require("http");
 var tiempoMinutos = 19;
+var tiempoMilisegundos =  0;
 var max = 45;
 var min = 20;
 
@@ -29,17 +30,20 @@ var calcTime = function (offset) {
     return nd;
 }
 var getMiliseconds = function(minutes){
-    return minutes*1000;
+    return minutes*60*1000;
 }
-
+tiempoMilisegundos = getMiliseconds(tiempoMinutos);
 var despertar = function(){
     tiempoMinutos = Math.floor(Math.random() * (max - min)) + min;
+    tiempoMilisegundos = getMiliseconds(tiempoMinutos);
     console.log("tiempo en minutos: ",tiempoMinutos);
+    console.log("tiempo en MS:", tiempoMilisegundos);
+
     if(isTime){
         http.get("http://on3dmonitor.herokuapp.com");
         console.log("despertando a heroku");
     }
     console.log("el ciclo se ha ejecutado");
-    setTimeout(despertar, getMiliseconds(tiempoMinutos));
+    setTimeout(despertar, tiempoMilisegundos);
 }
-setTimeout(despertar, getMiliseconds(tiempoMinutos));
+setTimeout(despertar, tiempoMilisegundos);
