@@ -33,6 +33,7 @@ var getMiliseconds = function(minutes){
     return minutes*60*1000;
 }
 tiempoMilisegundos = getMiliseconds(tiempoMinutos);
+console.log("is time: ", isTime());
 var despertar = function(){
     tiempoMinutos = Math.floor(Math.random() * (max - min)) + min;
     tiempoMilisegundos = getMiliseconds(tiempoMinutos);
