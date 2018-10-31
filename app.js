@@ -1,14 +1,16 @@
 var http = require("http");
+var tiempoMinutos = 20;
+
 //Despertar a heroku
 
 
-function isTime(){
+var isTime = function (){
     var currentHour =calcTime(-5).getHours();
 	if(currentHour < 18 && currentHour > 8) return true;
 	else return false;
     //your code
 }
-function calcTime(offset) {
+var calcTime = function (offset) {
     // create Date object for current location
     var d = new Date();
 
@@ -24,11 +26,18 @@ function calcTime(offset) {
     // return time as a string
     return nd;
 }
+var getMiliseconds = function(minutes){
+    return minutes*3600*1000;
+}
 
-setInterval(function() {
-	if(isTime()) 
-	{
-		http.get("http://on3dmonitor.herokuapp.com");
-		console.log("despertando a heroku");
-	}
-}, 1800000); // every 0.5 hours (1800000)
+var despertar = function(){
+    tiempoMinutos = Math.random(20,45);
+    console.log("tiempo en minutos: ",tiempoMinutos);
+    if(isTime){
+        http.get("http://on3dmonitor.herokuapp.com");
+        console.log("despertando a heroku");
+    }
+    console.log("el ciclo se ha ejecutado");
+    setTimeout(despertar, getMiliseconds(tiempoMinutos));
+}
+setTimeout(despertar, getMiliseconds(tiempoMinutos));
