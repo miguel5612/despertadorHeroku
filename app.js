@@ -1,5 +1,7 @@
 var http = require("http");
-var tiempoMinutos = 20;
+var tiempoMinutos = 19;
+var max = 45;
+var min = 20;
 
 //Despertar a heroku
 
@@ -27,11 +29,11 @@ var calcTime = function (offset) {
     return nd;
 }
 var getMiliseconds = function(minutes){
-    return minutes*3600*1000;
+    return minutes*1000;
 }
 
 var despertar = function(){
-    tiempoMinutos = Math.random(20,45);
+    tiempoMinutos = Math.floor(Math.random() * (max - min)) + min;
     console.log("tiempo en minutos: ",tiempoMinutos);
     if(isTime){
         http.get("http://on3dmonitor.herokuapp.com");
